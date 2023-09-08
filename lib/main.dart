@@ -1,6 +1,8 @@
 import 'package:bloodapplication/project/add.dart';
 import 'package:bloodapplication/project/home.dart';
+import 'package:bloodapplication/project/login_screen.dart';
 import 'package:bloodapplication/project/update.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -29,12 +31,21 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       // home:  MyHomePage(),
-      routes: {
-        '/':(context) => HomePage(),
-        '/add':(context) => AddUser(),
-        '/update':(context) => UpdateUser(),
-      },
-      initialRoute: '/',
+      // onGenerateInitialRoutes: ,
+      // routes: {
+      //   '/':(context) => HomePage(),
+      //   '/add':(context) => AddUser(),
+      //   '/update':(context) => UpdateUser(),
+      // },
+      // initialRoute: '/',
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder:(context,snapshot){
+          if(snapshot.hasData){
+            return HomePage();
+          }
+          return Login(); 
+        } ),
     );
   }
 }

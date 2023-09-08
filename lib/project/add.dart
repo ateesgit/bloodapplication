@@ -33,61 +33,64 @@ void addDonor(){
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text('Add Donors'),
         centerTitle: true,
         backgroundColor: Colors.red,),
         body: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: donorName,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text('Donor Name'),
-                    
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: donorName,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      label: Text('Donor Name'),
+                      
+                    ),
                   ),
                 ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: donorPhone,
-                  keyboardType: TextInputType.number,
-                  maxLength: 10,
-                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text('Phone Number'),
+          
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: donorPhone,
+                    keyboardType: TextInputType.number,
+                    maxLength: 10,
+                     decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      label: Text('Phone Number'),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: DropdownButtonFormField(
-                  decoration: InputDecoration(
-                    label: Text('Select Blood Group'),
-                  ),
-                 items: bloodGroups.map((e) => DropdownMenuItem(child: Text(e),value: e,)).toList(),
-                 onChanged:(val){
-                  selectedGroup=val;
-                 } ),
-              ),
-              ElevatedButton(
-               onPressed: (){
-                addDonor();
-                Navigator.pop(context);
-               },
-               style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
-                backgroundColor: MaterialStateProperty.all(Colors.red)
-               ),
-               child: Text('Submit',style: TextStyle(fontSize: 20),))
-            
-          ]),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      label: Text('Select Blood Group'),
+                    ),
+                   items: bloodGroups.map((e) => DropdownMenuItem(child: Text(e),value: e,)).toList(),
+                   onChanged:(val){
+                    selectedGroup=val;
+                   } ),
+                ),
+                ElevatedButton(
+                 onPressed: (){
+                  addDonor();
+                  Navigator.pop(context);
+                 },
+                 style: ButtonStyle(
+                  minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                  backgroundColor: MaterialStateProperty.all(Colors.red)
+                 ),
+                 child: Text('Submit',style: TextStyle(fontSize: 20),))
+              
+            ]),
+          ),
         ),
     );
   }
